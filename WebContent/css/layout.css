@@ -1,0 +1,13 @@
+.bottom-buffer { 
+	margin-bottom: 20px; 
+}
+
+.inner { 
+	border: 2px solid #e3e3e3;
+	padding: 10px;
+}
+
+.bottomright {
+	display: table-cell;
+	vertical-align: bottom;
+}
