@@ -1,4 +1,4 @@
-<form role="form" class="onb-form form-horizontal">
+<form role="form" id="onb-form" class="form-horizontal">
 	<!-- <legend>vElite Onboarding Form</legend> -->
 	<legend>Org Information</legend>
 	<div class="row bottom-buffer">
@@ -23,20 +23,40 @@
 		</div>
 	</div>
 	<legend>Log Information</legend>
+
 		<div class="row bottom-buffer">
 			<div class="col-sm-7 inner">
 				<label>Log Name</label>
-				<input type="text" class="form-control" placeholder="Log" id="log-name">
+				<input type="text" class="form-control" placeholder="Log" name="log[0].name">
 				<label>Log Servers</label>
-				<input type="text" class="form-control" placeholder="obltest1advvg.odc.vzwcorp.com, obltest2auavg.odc.vzwcorp.com" id="log-name">
+				<input type="text" class="form-control" placeholder="obltest1advvg.odc.vzwcorp.com, obltest2auavg.odc.vzwcorp.com" name="log[0].servers">
 				<label>Total Log Size</label>
-				<input type="text" class="form-control" placeholder="50GB" id="log-name">
+				<input type="text" class="form-control" placeholder="50GB" name="log[0].size">
 				<label>Extra Requrements</label>
-				<input type="text" class="form-control" placeholder="Additional Details" id="log-name">
+				<input type="text" class="form-control" placeholder="Additional Details" name="log[0].req">
 			</div>
 			<span class="form-group-btn">
-				<button class="btn btn-success btn-add" type="button">
+				<button class="btn btn-primary form-btn btn-add" type="button">
 					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</span>
+		</div>
+
+		<!-- The template for adding new field -->
+		<div class="row bottom-buffer hide" id="logTemplate">
+			<div class="col-sm-7 inner">
+				<label>Log Name</label>
+				<input type="text" class="form-control" placeholder="Log" name="name">
+				<label>Log Servers</label>
+				<input type="text" class="form-control" placeholder="obltest1advvg.odc.vzwcorp.com, obltest2auavg.odc.vzwcorp.com" name="servers">
+				<label>Total Log Size</label>
+				<input type="text" class="form-control" placeholder="50GB" name="size">
+				<label>Extra Requrements</label>
+				<input type="text" class="form-control" placeholder="Additional Details" name="req">
+			</div>
+			<span class="form-group-btn">
+				<button class="btn btn-danger form-btn btn-remove" type="button">
+					<span class="glyphicon glyphicon-minus"></span>
 				</button>
 			</span>
 		</div>
