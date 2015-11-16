@@ -1,21 +1,16 @@
-.bottom-buffer { 
+.border { 
 	margin-bottom: 20px; 
-}
-
-.inner { 
-
 	border-right: 2px solid #e3e3e3;
 	border-radius: 10px;
-	padding: 10px;
+	background-color: lightgray;
+	padding: 20px;
+	width: 75%;
 }
 
-.bottomright {
-	display: table-cell;
-	vertical-align: bottom;
+.log-info {
+	padding-bottom: 20px;
 }
 
-.form-btn {
-	position: relative;
-	top: 212px;
-	left: 10px;
+.form-horizontal {
+	padding-bottom: 50px;
 }
