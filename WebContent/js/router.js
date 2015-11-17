@@ -8,6 +8,10 @@ define([
 	var AppRouter = Backbone.Router.extend({
 		routes: {
 
+			'': 'onboard',
+			'dashboard': 'dashboard',
+			'admin': 'admin',
+			'onboard': 'onboard',
 			// Default
 			'*actions': 'defaultAction'
 		}
@@ -17,11 +21,14 @@ define([
 
 		var app_router = new AppRouter;
 
-		app_router.on('route:defaultAction', function(actions) {
-
+		app_router.on('route:onboard', function(actions) {
 			var form = new formView();
 			form.render();
+		});
 
+		app_router.on('route:defaultAction', function(actions) {
+			var form = new formView();
+			form.render();
 		});
 
 		Backbone.history.start();

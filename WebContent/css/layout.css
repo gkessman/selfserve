@@ -2,7 +2,7 @@
 	margin-bottom: 20px; 
 	border-right: 2px solid #e3e3e3;
 	border-radius: 10px;
-	background-color: lightgray;
+	background-color: #E0E0E0;
 	padding: 20px;
 	width: 75%;
 }
@@ -13,4 +13,8 @@
 
 .form-horizontal {
 	padding-bottom: 50px;
+}
+
+textarea {
+	resize: vertical;
 }

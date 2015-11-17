@@ -1,6 +1,6 @@
 <form role="form" id="onb-form" class="form-horizontal">
 	<!-- <legend>vElite Onboarding Form</legend> -->
-	<legend>Org Information</legend>
+	<legend>Organization Information</legend>
 	<div class="form-group">
 		<div class="col-sm-2">
 			<label>VAST ID</label>
@@ -11,8 +11,8 @@
 			<input type="text" class="form-control" placeholder="VP" id="vp">
 		</div>
 		<div class="col-sm-3">
-			<label>Organization</label>
-			<input type="text" class="form-control" placeholder="Org" id="org">
+			<label>Organization Name</label>
+			<input type="text" class="form-control" placeholder="IAAS" id="org">
 		</div>
 	</div>
 	<legend>Application Infomation</legend>
@@ -28,43 +28,45 @@
 		<button class="btn btn-primary form-btn btn-add" type="button">Add Log</button>
 	</span>
 	
-
 	<!-- The template for adding new field -->
 	<div class="log-info hide" id="logTemplate">
 		<div class="border">
 			<div class="form-group">
 				<div class="col-sm-4">
 					<label>Log Name</label>
-					<input type="text" class="form-control" placeholder="Log" name="name">
+					<input type="text" class="form-control" placeholder="access" name="name">
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7">
+				<div class="col-sm-8">
 					<label>Log Servers</label>
-					<input type="text" class="form-control" placeholder="obltest1advvg.odc.vzwcorp.com, obltest2auavg.odc.vzwcorp.com" name="servers">
+					<input type="text" class="form-control" placeholder="obltest1advvg, obltest2advvg" name="servers">
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2">
-					<label>Total Log Size</label>
-					<input type="text" class="form-control" placeholder="50GB" name="size">
+				<div class="col-sm-8">
+					<label>Log Path</label>
+					<input type="text" class="form-control" placeholder="/log/srv01/app/, /log/srv02/app/" name="paths">
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7">
+				<div class="col-sm-3">
+					<label>Daily Average Log Size</label>
+					<input type="text" class="form-control" placeholder="10GB" name="size">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-9">
 					<label>Extra Requrements</label>
-					<textarea type="text" class="form-control" placeholder="Additional Details" name="req"></textarea>
+					<textarea rows="4" type="text" class="form-control" placeholder="Any Additional Details" name="req"></textarea>
 				</div>
 			</div>
+			<span class="form-group-btn">
+				<button class="btn btn-danger form-btn btn-remove hide" type="button">Remove Log</button>
+			</span>
 		</div>
 		<span class="form-group-btn">
 			<button class="btn btn-primary form-btn btn-add" type="button">Add Log</button>
-		</span>
-		<span class="form-group-btn">
-			<button class="btn btn-warning form-btn btn-cancel" type="button">Cancel</button>
-		</span>
-		<span class="form-group-btn">
-			<button class="btn btn-danger form-btn btn-remove hide" type="button">Remove Log</button>
 		</span>
 	</div>
 	<hr />

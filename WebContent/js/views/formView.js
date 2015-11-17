@@ -12,7 +12,6 @@ define([
 		events: {
 			"click .btn-add": "addSection",
 			"click .btn-remove": "removeSection",
-			"click .btn-cancel": "removeSection",
 			"click .btn-submit": "buildForm"
 		},
 
@@ -41,25 +40,24 @@ define([
 			$clone
 				.find('[name="name"]').attr('name', 'log[' + this.logIndex + '].name').end()
 				.find('[name="servers"]').attr('name', 'log[' + this.logIndex + '].servers').end()
+				.find('[name="paths"]').attr('name', 'log[' + this.logIndex + '].paths').end()
 				.find('[name="size"]').attr('name', 'log[' + this.logIndex + '].size').end()
-				.find('[name="req"]').attr('name', 'log[' + this.logIndex + '].req').end();
+				.find('[name="req"]').attr('name', 'log[' + this.logIndex + '].req').end()
+				.find('button.btn-remove').removeClass('hide');
+
+			console.log("Clone", $clone.find('button.btn-add'));
 
 			if (this.logIndex === 1) {
 				$btn.addClass('hide');
 			} else {
 				$btn
-					.closest('div').children('span').children('button.btn-cancel').addClass('hide')
 					.closest('div').children('span').children('button.btn-add').addClass('hide')
-					.closest('div').children('span').children('button.btn-remove').removeClass('hide');
 			}
-
-			this.manageLogs();
-
 		},
 
 		removeSection: function(e) {
 			var self = this;
-			var $log = $(e.currentTarget).closest('div');
+			var $log = $(e.currentTarget).parents('div').eq(1);
 
 			$log.fadeOut('fast', function() {
 				$(this).remove();				
@@ -73,7 +71,7 @@ define([
 
 			if (logCnt.length >= 1) {
 				logCnt.last().children('span').children('button').removeClass('hide');
-				logCnt.last().children('span').children('button.btn-remove').addClass('hide');
+				logCnt.animate('fast');
 			} else {
 				$form.children('span').children('button').removeClass('hide');
 				this.logIndex = 0;
@@ -81,7 +79,8 @@ define([
 
 		},
 
-		buildForm: function() {
+		buildForm: function(e) {
+			e.preventDefault();
 			console.log("This is the form being built to submit!");
 		}
 	});
