@@ -33,7 +33,9 @@ define([
 				.removeClass('hide')
 				.removeAttr('id')
 				.attr('log-index', this.logIndex)
-				.insertBefore($template);
+				.css({opacity: 0})
+				.insertBefore($template)
+				.animate({opacity: 1});
 
 			// Update the name attributes
 			$clone
@@ -58,7 +60,9 @@ define([
 		removeSection: function(e) {
 			var $log = $(e.currentTarget).closest('div');
 
-			$log.remove();
+			$log.fadeOut('fast', function() {
+				$log.remove();				
+			});
 
 			this.manageLogs();
 		},
@@ -67,10 +71,12 @@ define([
 			var logCnt = this.$el.find('div.log-info').not('.hide');
 			var $form = $('#onb-form');
 
+			console.log(logCnt.length)
 			if (logCnt.length >= 1) {
 				logCnt.last().children('span').children('button').removeClass('hide');
 				logCnt.last().children('span').children('button.btn-remove').addClass('hide');
 			} else {
+				console.log("Does this happen!?")
 				$form.children('span').children('button').removeClass('hide');
 				this.logIndex = 0;
 			}
