@@ -7,13 +7,13 @@ define([
 
 	var formView = Backbone.View.extend({
 
-		el: $('.page'),
+		el: $('.content'),
 
 		events: {
 			"click .btn-add": "addSection",
 			"click .btn-remove": "removeSection",
-			"click .btn-submit": "buildForm",
-			"click .btn-cancel": "cancelSection"
+			"click .btn-cancel": "removeSection",
+			"click .btn-submit": "buildForm"
 		},
 
 		initialize: function() {
@@ -21,13 +21,12 @@ define([
 		},
 
 		render: function() {
-			console.log("This is the form view!");
-
 			this.$el.html(formTemplate);
 		},
 
 		addSection: function(e) {
 			this.logIndex++;
+			var $btn = $(e.currentTarget);
 			var $template = $('#logTemplate'),
 				$clone = $template
 				.clone()
@@ -41,34 +40,41 @@ define([
 				.find('[name="name"]').attr('name', 'log[' + this.logIndex + '].name').end()
 				.find('[name="servers"]').attr('name', 'log[' + this.logIndex + '].servers').end()
 				.find('[name="size"]').attr('name', 'log[' + this.logIndex + '].size').end()
-				.find('[name="req"]').attr('name', 'log[' + this.logIndex + '].req').end()
+				.find('[name="req"]').attr('name', 'log[' + this.logIndex + '].req').end();
 
-			var $btn = $(e.currentTarget);
-
-			$btn
-				.removeClass('btn-primary btn-add')
-				.addClass('btn-danger btn-remove')
-				.html('Remove Log');
-
-			var $cancelBtn = $(e.currentTarget).closest('div').children('span:last');
-			console.log($cancelBtn.text())
-			if($cancelBtn.text().indexOf('Cancel') >= 0) {
-				$cancelBtn.remove();
+			if (this.logIndex === 1) {
+				$btn.addClass('hide');
+			} else {
+				$btn
+					.closest('div').children('span').children('button.btn-cancel').addClass('hide')
+					.closest('div').children('span').children('button.btn-add').addClass('hide')
+					.closest('div').children('span').children('button.btn-remove').removeClass('hide');
 			}
+
+			this.manageLogs();
+
 		},
 
 		removeSection: function(e) {
-			console.log("Removing form section!");
-			var $row = $(e.currentTarget).closest('div');
+			var $log = $(e.currentTarget).closest('div');
 
-			$row.remove();
+			$log.remove();
+
+			this.manageLogs();
 		},
 
-		cancelSection: function(e) {
-			console.log("Cancelling Section");
-			var x = $(e.currentTarget).closest('div');
-			// this.removeSection(e);
-			console.log(x);
+		manageLogs: function() {
+			var logCnt = this.$el.find('div.log-info').not('.hide');
+			var $form = $('#onb-form');
+
+			if (logCnt.length >= 1) {
+				logCnt.last().children('span').children('button').removeClass('hide');
+				logCnt.last().children('span').children('button.btn-remove').addClass('hide');
+			} else {
+				$form.children('span').children('button').removeClass('hide');
+				this.logIndex = 0;
+			}
+
 		},
 
 		buildForm: function() {
