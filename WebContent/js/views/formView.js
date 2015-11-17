@@ -82,6 +82,8 @@ define([
 		buildForm: function(e) {
 			e.preventDefault();
 			console.log("This is the form being built to submit!");
+			var logs = this.$el.find('div.log-info').not('.hide');
+			console.log(logs.length);
 		}
 	});
 
