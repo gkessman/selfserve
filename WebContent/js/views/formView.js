@@ -19,7 +19,6 @@ define([
 		initialize: function() {
 			this.logIndex = 0;
 			this.model = new FormModel();
-			console.log(this.model);
 		},
 
 		render: function() {
@@ -51,8 +50,6 @@ define([
 				.find('[name="size"]').attr('name', 'log[' + this.logIndex + '].size').end()
 				.find('[name="req"]').attr('name', 'log[' + this.logIndex + '].req').end()
 				.find('button.btn-remove').removeClass('hide');
-
-			console.log("Clone", $clone.find('button.btn-add'));
 
 			if (this.logIndex === 1) {
 				$btn.addClass('hide');
@@ -90,29 +87,27 @@ define([
 			e.preventDefault();
 			var model = this.model;
 			var data = {};
-			console.log("This is the form being built to submit!");
+			data.log = [];
+			var logArray = [];
 			var logs = this.$el.find('div.log-info').not('.hide');
-			console.log(logs.length);
 
-			// data.vast = 1234;
-			// data.vp = 'vicepresident';
-			// data.org = 'iaas';
-			// data.appname = "application";
-			// data.log = [{
-			// 	name : 'access',
-			// 	servers : 'server01apdvg',
-			// 	paths : '/log/srv01/application',
-			// 	size : '10GB',
-			// 	req : 'test'
-			// }]
+			data.vast = this.$el.find('input[name="vast"]').val();
+			data.vp = this.$el.find('input[name="vp"]').val();
+			data.org = this.$el.find('input[name="org"]').val();
+			data.appname = this.$el.find('input[name="appname"]').val();
 
-			// data.vast = this.$el.find('input[name]').val()
+			_.each(logs, function(val, i) {
+				var idx = $(val).attr('log-index')
+				data.log.push({
+					name: $(val).find('input[name="log[' + idx + '].name"]').val(),
+					servers: $(val).find('input[name="log[' + idx + '].servers"]').val(),
+					paths: $(val).find('input[name="log[' + idx + '].paths"]').val(),
+					size: $(val).find('input[name="log[' + idx + '].size"]').val(),
+					req: $(val).find('textarea[name="log[' + idx + '].req"]').val()
+				})
+			})
 
-			// model.set(data);
-
-			this.$el.find('input[name]').each(function() {
-				model.set(this.name, this.value);
-            })
+			model.set(data);
 			console.log(model);
 		}
 	});
