@@ -2,8 +2,9 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
+	'models/formModel',
 	'text!templates/form/formTemplate.html'
-], function($, _, Backbone, formTemplate) {
+], function($, _, Backbone, FormModel, FormTemplate) {
 
 	var formView = Backbone.View.extend({
 
@@ -17,10 +18,12 @@ define([
 
 		initialize: function() {
 			this.logIndex = 0;
+			this.model = new FormModel();
+			console.log(this.model);
 		},
 
 		render: function() {
-			this.$el.html(formTemplate);
+			this.$el.html(FormTemplate);
 		},
 
 		addSection: function(e) {
@@ -32,9 +35,13 @@ define([
 				.removeClass('hide')
 				.removeAttr('id')
 				.attr('log-index', this.logIndex)
-				.css({opacity: 0})
+				.css({
+					opacity: 0
+				})
 				.insertBefore($template)
-				.animate({opacity: 1});
+				.animate({
+					opacity: 1
+				});
 
 			// Update the name attributes
 			$clone
@@ -60,7 +67,7 @@ define([
 			var $log = $(e.currentTarget).parents('div').eq(1);
 
 			$log.fadeOut('fast', function() {
-				$(this).remove();				
+				$(this).remove();
 				self.manageLogs();
 			});
 		},
@@ -81,9 +88,32 @@ define([
 
 		buildForm: function(e) {
 			e.preventDefault();
+			var model = this.model;
+			var data = {};
 			console.log("This is the form being built to submit!");
 			var logs = this.$el.find('div.log-info').not('.hide');
 			console.log(logs.length);
+
+			// data.vast = 1234;
+			// data.vp = 'vicepresident';
+			// data.org = 'iaas';
+			// data.appname = "application";
+			// data.log = [{
+			// 	name : 'access',
+			// 	servers : 'server01apdvg',
+			// 	paths : '/log/srv01/application',
+			// 	size : '10GB',
+			// 	req : 'test'
+			// }]
+
+			// data.vast = this.$el.find('input[name]').val()
+
+			// model.set(data);
+
+			this.$el.find('input[name]').each(function() {
+				model.set(this.name, this.value);
+            })
+			console.log(model);
 		}
 	});
 
